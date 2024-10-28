@@ -83,7 +83,44 @@
       </form>
     </div>
     
+    <div id="customer-list">
+      <ul>Lista klientów
+        <li>Jan Nowak</li>
+      </ul>
+      <button type="button" onclick="showForm()" class="btn"></button>
+    </div>
+
+    <div class="customer-form" style="display: none";>
+      <h1 id="login-form">Form</h1>
+      <div class="d-flex justify-content-center">
+      </div>
+    </div>
+
     <script>
+      function showForm(){
+        document.getElementById('customer-list').style.display = "none";
+        document.getElementById('customer-form').style.display = "block";
+      }
+
+      function showList(){
+        document.getElementById('customer-list').style.display = "block";
+        document.getElementById('customer-form').style.display = "none";
+
+        let ul = document.getElementById('customer-list-data');
+        ul.innerHTML = "";
+        for(let customer of customerList){
+          ul.innerHTML += `<li>${customer.name} <button class="btn btn-primary" onclick="showCustomer(${customer.id})">Edytuj</button></li>`
+        }
+      }
+
+      var customersList = [];
+
+      function showCustomer(customerId){
+        showForm();
+        let customer = customersList.find((customer) => customer.id = customerId);
+        addDataToForm(customer);
+      }
+
       function saveFormData(event) {
         // Prevent default form submission behavior
         event.preventDefault();
