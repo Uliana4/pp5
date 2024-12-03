@@ -1,14 +1,15 @@
-<form id="companyForm">
+{{customer|json}}
+<form id="companyForm" (ngSubmit)="save()">
     <input type="text" hidden class="client-id" value="none">
     <div class="mb-3">
       <label for="firmName" class="form-label">Nazwa firmy</label>
-      <input type="text" class="form-control" id="firmName" aria-describedby="nameHelp" placeholder="Wprowadź nazwę firmy" required>
+      <input type="text" class="form-control" name="name" [(ngModel)]="customer.name" id="firmName" aria-describedby="nameHelp" placeholder="Wprowadź nazwę firmy" required>
       <div id="nameHelp" class="form-text">Nie udostępniamy tych danych nikomu innemu.</div>
     </div>
 
     <div class="mb-3">
       <label for="nip" class="form-label">NIP</label>
-      <input type="text" class="form-control" id="nip" aria-describedby="nipHelp" placeholder="Wprowadź NIP firmy" required>
+      <input type="text" class="form-control" name="nip" [(ngModel)]="customer.nip" id="nip" aria-describedby="nipHelp" placeholder="Wprowadź NIP firmy" required>
       <div id="nipHelp" class="form-text">Nie udostępniamy Twojego NIP nikomu innemu.</div>
     </div>
 
