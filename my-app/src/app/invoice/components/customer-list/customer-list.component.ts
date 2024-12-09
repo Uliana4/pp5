@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Router } from '@angular/router';
 import { Customer } from '../../models/customer';
@@ -9,7 +9,7 @@ import { Customer } from '../../models/customer';
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
-export class CustomerListComponent {
+export class CustomerListComponent implements OnInit, OnDestroy{
 
   customersList: Customer[] = []
   
@@ -17,7 +17,22 @@ export class CustomerListComponent {
     private customerService: CustomerService,
     private router: Router
   ){
-    this.customersList = this.customerService.getCustomers();
-    console.log(this.customersList)
+    console.log(this.customerService.getCustomers());
+
+  }
+  ngOnDestroy(): void {
+      console.log('opuszczam komponent');
+  }
+  ngOnInit(): void {
+      this.customersList = this.customerService.getCustomers();
+  }
+
+  redirectToForm(){
+    this.router.navigate(['/invoice/customer-form'])
+  }
+
+  deleteCustomer(customer:Customer){
+    console.log("rodzic ma usunac:", customer)
+    this.customersList = this.customerService.removeCustomer(customer);
   }
 }

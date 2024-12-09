@@ -19,11 +19,15 @@ export class CustomerFormComponent {
   }
 
   customer: Customer = new Customer();
-  handleSubmit(){
+  save(){
     console.log(this.customer);
     this.customerService.addCustomer(this.customer);
+    this.showList()
+    
+  }
+
+  showList(){
     this.router.navigate(['/invoice/customer-list']);
 
-    
   }
 }
